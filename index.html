@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            display: grid;
+            align-items: center;
+            max-width: 1200px;
+        }
+
+        body {
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        }
+
+        @media print {
+            #sumar, #agregarFila, #imprimirFactura {
+                display: none;
+            }
+
+            input {
+            border: transparent; /* Cambiar a 'transparent' para imprimir */
+            }
+
+            body {
+                font-size: 35px;
+            }
+
+            input {
+                font-size: 20px;
+            }
+        }
+
+        .center-image {
+            display: flex;
+            justify-content: center;
+            margin-top: -30px;
+        }
+
+    </style>
+</head>
+<body>
+<div>
+    <h1 style="text-align: center;"><span style="color: brown;">⋆</span> FACTURA <span style="color: brown;">⋆</span></h1>
+    <div class="center-image">
+        <img src="SAURA.png" alt="" style="max-width: 100%; width: 300px; ">
+    </div>
+    <hr style="margin-left: 10%; margin-right: 10%; margin-bottom: 2%;">
+</div>
+<div>
+    <table style="margin-left: 10%; margin-right: 10%;">
+        <tr>
+            <td>FACTURAR A</td>
+            <td>Nº DE FACTURA</td>
+            <td><input type="number" name="" id=""></td>
+        </tr>
+        <tr>
+            <td><input type="text" name="" id=""></td>
+            <td>FECHA</td>
+            <td><input type="date" name="" id=""></td>
+        </tr>
+    </table>
+</div>
+
+<div>
+    <hr style="margin-left: 10%; margin-right: 10%; margin-bottom: 2%;">
+    <table style="margin-left: 10%; margin-right: 10%; ">
+        <tr style="background-color: brown; color: aliceblue;">
+            <td>DESCRIPCIÓN</td>
+            <td>IMPORTE</td>
+        </tr>
+        <tr>
+            <td><input type="text" name="" id=""></td>
+            <td><input type="number" name="" id="" class="contador"></td>
+        </tr>
+        <!-- Aquí agregamos un contenedor para las filas adicionales -->
+        <tbody id="filasAdicionales"></tbody>
+    </table>
+</div>
+
+<div >
+    <div style="display: flex; justify-content: flex-end; margin-right: 10%;">
+        <button id="sumar" style="width: 100px;">Sumar</button>
+    </div>
+    <h3 style="text-align: right; margin-right: 10%; color: brown;">TOTAL $<span id="total"></span></h3>
+    <hr style="margin-left: 10%; margin-right: 10%; margin-bottom: 2%">
+    <h2 style="text-align: right; margin-right: 10%; color: brown;">¡GRACIAS!</h2>
+    <!-- Agregamos un botón para agregar filas adicionales -->
+    <button id="agregarFila" style="width: 100px; margin-left: 10%;">Agregar Fila</button>
+    <!-- Agregamos un botón de impresión -->
+    <button id="imprimirFactura" style="width: 100px; margin-left: 10%;">Imprimir</button>
+</div>
+
+<!-- JavaScript para agregar filas -->
+<script>
+    document.getElementById("agregarFila").addEventListener("click", function () {
+        const tbody = document.getElementById("filasAdicionales");
+        const newRow = document.createElement("tr");
+        newRow.innerHTML = `
+            <td><input type="text" name="" id=""></td>
+            <td><input type="number" name="" id="" class="contador"></td>
+        `;
+        tbody.appendChild(newRow);
+    });
+
+    document.getElementById("imprimirFactura").addEventListener("click", function () {
+        window.print();
+    });
+
+    const TOTAL = document.getElementById('total');
+    let contador = 0;
+    const BOTON = document.getElementById('sumar');
+    BOTON.addEventListener('click', () => {
+        contador = 0; // Restablecer el contador a 0
+        const CONTADORES = document.querySelectorAll('.contador'); // Obtener todos los campos con clase "contador"
+        CONTADORES.forEach(input => {
+            contador += parseFloat(input.value) || 0; // Sumar los valores como números de punto flotante
+        });
+        TOTAL.textContent = contador.toFixed(2); // Mostrar el resultado en el elemento 'total' con dos decimales
+    });
+</script>
+
+</body>
+</html>
+
+
