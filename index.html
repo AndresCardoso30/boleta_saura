@@ -15,12 +15,17 @@
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
         }
 
+        textarea {
+            width: 500px;
+            max-width: 500px;
+        }
+
         @media print {
             #sumar, #agregarFila, #imprimirFactura {
                 display: none;
             }
 
-            input {
+            input, textarea {
             border: transparent; /* Cambiar a 'transparent' para imprimir */
             }
 
@@ -28,16 +33,16 @@
                 font-size: 25px;
             }
 
-            input {
+            input, textarea {
                 font-size: 20px;
+            }
+
+            textarea{
+                resize: none; /* Desactivar la manija de expansión */
+                overflow: hidden; /* Ocultar la barra de navegación */
             }
         }
 
-        .center-image {
-            display: flex;
-            justify-content: center;
-            margin-top: -30px;
-        }
 
     </style>
 </head>
@@ -67,7 +72,7 @@
             <td>IMPORTE</td>
         </tr>
         <tr>
-            <td><input type="text" name="" id=""></td>
+            <td><textarea type="text" name="" id=""></textarea></td>
             <td><input type="number" name="" id="" class="contador"></td>
         </tr>
         <!-- Aquí agregamos un contenedor para las filas adicionales -->
@@ -94,7 +99,7 @@
         const tbody = document.getElementById("filasAdicionales");
         const newRow = document.createElement("tr");
         newRow.innerHTML = `
-            <td><input type="text" name="" id=""></td>
+            <td><textarea type="text" name="" id=""></textarea></td>
             <td><input type="number" name="" id="" class="contador"></td>
         `;
         tbody.appendChild(newRow);
